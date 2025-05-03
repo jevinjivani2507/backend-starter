@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { User } from "../types/User";
+import { User } from "@/types/User";
 
 const UserSchema: Schema = new Schema<User>({
   passportId: { type: String, required: true },
