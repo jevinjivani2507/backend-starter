@@ -1,8 +1,10 @@
 import cors from "cors";
 import express from "express";
 
+import helloRoute from "./routes/sample";
+
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.use(
   cors({
@@ -10,6 +12,8 @@ app.use(
     credentials: true,
   })
 );
+
+app.use("/", helloRoute);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
