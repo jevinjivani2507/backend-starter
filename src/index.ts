@@ -3,13 +3,19 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import passport from "passport";
-import helloRoute from "@/routes/sample";
-import { useJwtStrategy, validateAuth } from "@/middlewares/auth";
 import { connectDB } from "@/config/database";
+import {
+  useGoogleCallback,
+  useGoogleStrategy,
+  useJwtStrategy,
+  validateAuth,
+} from "@/middlewares/auth";
+import helloRoute from "@/routes/sample";
 import userRoutes from "@/routes/user";
+import { handleGoogleCallback, initiateGoogleLogin } from "@/utils/auth";
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000;
 
 app.use(
   cors({
@@ -23,6 +29,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 passport.use(useJwtStrategy);
+passport.use(useGoogleStrategy);
+
+app.get("/auth/google", initiateGoogleLogin);
+app.get("/auth/google/callback", useGoogleCallback, handleGoogleCallback);
 
 connectDB();
 
