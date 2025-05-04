@@ -14,6 +14,7 @@ import {
 } from "@/middlewares/auth";
 import helloRoute from "@/routes/sample";
 import userRoutes from "@/routes/user";
+import todoRoutes from "@/routes/todo";
 import { handleGoogleCallback, initiateGoogleLogin } from "@/utils/auth";
 
 const app = express();
@@ -43,6 +44,7 @@ connectDB();
 
 app.use("/", helloRoute);
 app.use("/user", validateAuth, userRoutes);
+app.use("/todo", validateAuth, todoRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
