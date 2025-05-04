@@ -3,7 +3,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import passport from "passport";
+import swaggerUi from "swagger-ui-express";
 import { connectDB } from "@/config/database";
+import swaggerSpecs from "@/config/swagger";
 import {
   useGoogleCallback,
   useGoogleStrategy,
@@ -30,6 +32,9 @@ app.use(cookieParser());
 
 passport.use(useJwtStrategy);
 passport.use(useGoogleStrategy);
+
+// Swagger documentation route
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 app.get("/auth/google", initiateGoogleLogin);
 app.get("/auth/google/callback", useGoogleCallback, handleGoogleCallback);
