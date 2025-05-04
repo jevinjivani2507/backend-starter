@@ -5,11 +5,12 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "nodemon --exec \"bun run src/index.ts\" --watch src -e ts"
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/cors": "^2.8.17"
+    "@types/cors": "^2.8.17",
+    "nodemon": "^3.1.10"
   },
   "peerDependencies": {
     "typescript": "^5"
